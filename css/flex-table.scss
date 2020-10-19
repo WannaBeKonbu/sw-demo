@@ -1,0 +1,90 @@
+//m-table-two
+.m-table-two{
+  table tr th{
+    background: #F3FBFF;
+  }
+  table th,table td{
+    padding: 10px 10px;
+  }
+}
+.ivu-checkbox-wrapper{
+  margin-right: 20px;
+}
+.ivu-radio-wrapper{
+  white-space:normal;
+}
+/*注*/
+.m-note{
+  color:#999;
+  .u-red{
+    color: #FF0000;
+  }
+}
+
+/*radio*/
+.m-radio{
+  .u-input{
+    width:100px;
+    .ivu-input{
+      border: none;
+      border-radius: 0;
+      border-bottom: 1px solid #dcdee2;
+    }
+  }
+}
+//m-icon
+.m-operation-wrapper .ivu-icon,.m-icon .ivu-icon{
+  cursor: pointer;
+  color: #3B94E3;
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 5px;
+  vertical-align: middle;
+  &:last-child{
+    margin-right: 0;
+  }
+}
+.m-icon {
+  .u-icon-input{
+    width: 80%;
+  }
+}
+/*add del操作*/
+.m-operation-wrapper{
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+  right: -60px;
+  line-height: 1;
+}
+//m-flex
+.m-flex-wrapper{
+  padding: 0 !important;
+}
+.m-flex{
+  position: relative;
+  display: flex;
+  //justify-content: space-between;
+  //align-items: center;
+  /*flex-wrap: wrap;*/
+  border-bottom:1px solid #e8eaec;
+  &:last-child{
+    border-bottom: none;
+  }
+  .m-flex-item{
+    flex:1;
+    flex-shrink: 1;
+    text-align: left;
+    /*align-items: center;*/
+    border-right:1px solid #e8eaec;
+    &:last-child{
+      border-right: none;
+    }
+    .m-body{
+      padding:15px;
+      height:100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

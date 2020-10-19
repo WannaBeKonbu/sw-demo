@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<!--<html manifest="../manifest.appcache">-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/fonts/iview.css">
+    <!--<link rel="stylesheet" href="./css/iview.css">-->
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/flex-table.scss">
+    <script src="../public/jquery-1.12.4.min.js"></script>
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+        .u-padding{
+            padding: 20px 30px 20px 20px;
+        }
+        .u-padding-one{
+            padding: 10px;
+        }
+        .m-container {
+            position: relative;
+        }
+
+        .m-container .m-left {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 160px;
+            border: 1px solid #eeeeee;
+            border-top: none;
+            padding: 20px 20px;
+        }
+
+        .m-container .m-left .u-title {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .m-container .m-right {
+            margin-left: 160px;
+        }
+
+        .m-container .m-right .m-right-content {
+            height: calc(100vh - 200px);
+            overflow: auto;
+        }
+
+        .m-container .m-right .m-content .m-content-wrapper ::v-deep .m-item {
+            /*line-height: 2.5rem;*/
+            /*margin-bottom:15px;*/
+        }
+
+        .m-container .m-right .m-content .m-content-wrapper ::v-deep .m-item .u-title, .m-container .m-right .m-content .m-content-wrapper ::v-deep .m-item .u-sub-title {
+            font-size: 18px;
+            color: #0E7BDD;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .m-container .m-right .m-content .m-content-wrapper ::v-deep .m-item .u-sub-title:before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #0E7BDD;
+            margin-right: 10px;
+        }
+
+        .m-container .m-right .m-content .m-content-wrapper ::v-deep .m-item .m-con {
+            /*font-size: 16px;*/
+        }
+        /*flex*/
+        .m-flex-one{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .m-flex-two{
+            display: flex;
+            align-items: center;
+        }
+        .m-flex-two .m-flex-two-left{
+            flex: 0 0 140px;
+            text-align: right;
+            padding: 10px 12px 10px 0;
+        }
+        .m-flex-two .m-flex-two-right{
+            flex: 1 1 auto;
+        }
+        .m-tree a {
+            display: block;
+            position: relative;
+            transition: all .3s;
+            color: #515a6e;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            background: 0 0;
+            text-decoration: none;
+            outline: 0;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        .m-tree a:active, a:hover {
+            outline: 0;
+            text-decoration: none;
+        }
+        .m-tree a:hover {
+            color: #57a3f3;
+        }
+        .del-icon {
+            position: absolute;
+            margin-left: 22px;
+            margin-top: 40px;
+        }
+        .m-add {
+            display: inline-block;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="layout" v-cloak>
+        <base-head></base-head>
+        <div class="m-content">
+            <div class="m-content-wrapper">
+                <base-title title="实施-离线版"></base-title>
+                <div class="m-container">
+                    <div class="m-left m-fl">
+                        <div class="u-title u-color-blue">目录</div>
+                        <div class="m-tree">
+                            <a href="#basic_usage">功能性</a>
+                            <a href="#static_position">性能效率</a>
+                        </div>
+                    </div>
+                    <div class="m-right">
+                        <div class="m-right-content u-padding">
+                            <div class="m-right-content-wrapper">
+                                <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="140">
+                                <div class="m-statistical m-flex-one u-margin-two">
+                                    <div class="m-num">
+                                        <span>用例共</span>
+                                        <span class="u-color-blue">60</span>
+                                        <span>条，</span>
+
+                                        <span>执行</span>
+                                        <span class="u-color-blue">60</span>
+                                        <span>条，</span>
+
+                                        <span>未执行</span>
+                                        <span class="u-color-blue">60</span>
+                                        <span>条，</span>
+
+                                        <span>通过</span>
+                                        <span class="u-color-blue">60</span>
+                                        <span>条，</span>
+
+                                        <span>基本通过</span>
+                                        <span class="u-color-blue">60</span>
+                                        <span>条，</span>
+
+                                        <span>未通过</span>
+                                        <span class="u-color-blue">60</span>
+                                        <span>条，</span>
+
+                                        <span>不适用</span>
+                                        <span class="u-color-blue">60</span>
+                                        <span>条</span>
+                                    </div>
+                                    <div class="m-button">
+                                        <i-button type="primary"  icon="md-add" @click="add">新增</i-button>
+                                    </div>
+                                </div>
+                                <div class="m-item" >
+                                    <base-sub-title title="功能性" id="basic_usage"></base-sub-title>
+                                    <div class="m-table-two u-margin-two">
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th>用例编号</th>
+                                                <th>用例目的</th>
+                                                <th>实测结果</th>
+                                                <th>结果状态</th>
+                                                <th>缺陷描述</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <template v-for="(item,index) in table">
+                                                <tr>
+                                                    <td class="u-label u-color-blue" @click="showModal">
+sdf
+                                                    </td>
+                                                    <td>
+                                                        <i-input type="text" :maxlength="100"></i-input>
+                                                    </td>
+                                                    <td>
+                                                        <i-input type="text" :maxlength="100"></i-input>
+                                                    </td>
+                                                    <td>
+                                                        <i-select>
+                                                            <template v-for="item in testResultList">
+                                                                <i-option  :value="item.dataId" :key="item.dataId">{{ item.dataName }}</i-option>
+                                                            </template>
+                                                        </i-select>
+                                                    </td>
+                                                    <td>
+                                                        <i-input type="textarea" :rows="4" :maxlength="500"></i-input>
+                                                            <Icon type="ios-close-circle-outline" class="del-icon" @click="del(index)" />
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                            </tbody>
+                                        </table>
+                                        <div class="m-icon u-margin-one m-add" @click="add">
+                                            <span><Icon type="ios-add-circle-outline" /></span>
+                                            <span class="u-color-blue u-vertical-align">新增行</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-item" >
+                                    <base-sub-title title="性能效率" id="static_position"></base-sub-title>
+                                    <div class="u-margin-two">
+                                        <div class="m-icon u-margin-one m-add" @click="add">
+                                            <span><Icon type="ios-add-circle-outline" /></span>
+                                            <span class="u-color-blue u-vertical-align">新增行</span>
+                                        </div>
+                                        <template>
+                                        <div class="u-border-two u-padding-one">
+                                            <div class="m-option m-flex-two">
+                                                <div class="m-flex-two-left u-color-blue">sad</div>
+                                                <div class="m-flex-two-right">dsfwef</div>
+                                            </div>
+                                            <div class="m-option u-margin-two">
+                                                <form-item label="服务器地址：" prop="hopResult" class="u-label">
+                                                    <i-input type="text" :maxlength="100"></i-input>
+                                                </form-item>
+                                            </div>
+                                            <div class="m-option u-margin-two">
+                                                <form-item label="测试工具：" prop="hopResult" class="u-label">
+                                                    <i-input type="text" :maxlength="100"></i-input>
+                                                </form-item>
+                                            </div>
+                                            <div class="m-option u-margin-two">
+                                                <form-item label="测试脚本：" prop="hopResult" class="u-label">
+                                                    <i-input type="text" :maxlength="100"></i-input>
+                                                </form-item>
+                                            </div>
+                                            <div class="m-option u-margin-two">
+                                                <form-item label="并发用户数：" prop="hopResult" class="u-label">
+                                                    <div class="m-icon" @click="add">
+                                                        <span><Icon type="ios-add-circle-outline" /></span>
+                                                        <span class="u-color-blue u-vertical-align">新增行</span>
+                                                    </div>
+                                                    <div class="m-item-wrapper u-border-two u-padding">
+                                                        <template v-for="(item,index) in formValidate.ycsTestCasePerformanceTimes">
+                                                            <div class="m-option">
+                                                                <FormItem label="并发用户数：" class="u-label"
+                                                                >
+                                                                    <i-inputNumber v-model="item.concurrentNum" :min="1" style="width: 100%"></i-inputNumber>
+                                                                </FormItem>
+                                                                <div class="m-operation-wrapper" @click="del(index)">
+                                                                    <Icon type="ios-close-circle-outline" />
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </form-item>
+                                            </div>
+
+                                        </div>
+                                        </template>
+                                    </div>
+                                </div>
+                                </i-form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../public/axios.js"></script>
+<script type="text/javascript" src="../public/vue.js"></script>
+<script type="text/javascript" src="../public/iview.js"></script>
+<script type="text/javascript" src="../public/base-head.js"></script>
+<script type="text/javascript" src="../public/base-title.js"></script>
+<script type="text/javascript" src="../public/base-page.js"></script>
+<script type="text/javascript" src="../public/base-sub-title.js"></script>
+<script type="text/javascript" src="../public/function.js"></script>
+<script type="text/javascript" src="../public/http.js"></script>
+<script type="text/javascript" src="../js/resultEntry.js"></script>
+<script type="text/javascript" src="../js/sw.js"></script>
+</html>

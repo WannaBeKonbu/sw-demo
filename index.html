@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<!--<html manifest="./manifest.appcache">-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/fonts/iview.css">
+    <!--<link rel="stylesheet" href="./css/iview.css">-->
+    <link rel="stylesheet" href="./css/common.css">
+</head>
+<body>
+    <div class="layout" v-cloak>
+        <base-head></base-head>
+        <div class="m-content">
+            <div class="m-content-wrapper">
+                <base-title title="实施-离线版"></base-title>
+                <div class="u-padding-one">
+                    <div class="m-search">
+                        <div class="m-item">
+                            <span class="u-label">软件名称：</span>
+                            <i-input v-model="postList.title" style="width: 200px" />
+                        </div>
+                        <div class="m-item">
+                            <i-button type="primary"  @click="search" style="margin-right: 20px">更新项目</i-button>
+                            <!--<Button type="primary"  icon="md-add" @click="add" style="margin-right: 20px">新增评估</Button>-->
+                        </div>
+                    </div>
+                    <div class="m-table">
+                        <i-table :columns="columns" :data="tableData" stripe>
+                            <template slot-scope="{ row, index }" slot="action">
+                                <div class="m-operation">
+                                    <div class="m-btn-item" @click="view(row)">查看</div>
+                                    <div class="m-btn-item" @click="update(row)">更新</div>
+                                    <div class="m-btn-item" @click="synchronous(row)">同步</div>
+                                    <div class="m-btn-item" @click="resultEntry(row)">结果录入</div>
+                                    <div class="m-btn-item" @click="regressionTest(row)">回归测试</div>
+                                </div>
+                            </template>
+                        </i-table>
+                    </div>
+                    <!--m-page-->
+                    <div class="m-page u-margin-one">
+                        <base-page :page="page" @onChange="onChange" @onPageSizeChange="onPageSizeChange"></base-page>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="./public/axios.js"></script>
+<script type="text/javascript" src="./public/vue.js"></script>
+<script type="text/javascript" src="./public/iview.js"></script>
+<script type="text/javascript" src="./public/base-head.js"></script>
+<script type="text/javascript" src="./public/base-title.js"></script>
+<script type="text/javascript" src="./public/base-page.js"></script>
+<script type="text/javascript" src="./public/function.js"></script>
+<script type="text/javascript" src="./public/http.js"></script>
+<script type="text/javascript" src="./js/index.js"></script>
+<script type="text/javascript" src="./js/sw.js"></script>
+</html>
