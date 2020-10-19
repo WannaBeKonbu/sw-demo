@@ -96,7 +96,7 @@ var vm = new Vue({
                 console.log('浏览器支持serviceWorker')
 
                 // 开始注册service workers
-                navigator.serviceWorker.register('./js/sw.js', {
+                navigator.serviceWorker.register('./sw.js', {
                     scope: './'
                 }).then(registration => {
                     console.log('service worker注册成功:', registration)
