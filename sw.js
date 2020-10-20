@@ -30,7 +30,7 @@ self.addEventListener('install', function(e) {
   // install 事件中一般会将 cacheList 中要换存的内容通过 addAll 方法，请求一遍放入 caches 中
   //https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
   e.waitUntil(
-    caches.open('sw').then(function(cache) {
+    caches.open(cacheStorageKey).then(function(cache) {
       return cache.addAll(cacheList)
     })
   );
@@ -42,7 +42,7 @@ self.addEventListener('activate', function(e) {
   var cacheDeletePromises = caches.keys().then(cacheNames => {
     return Promise.all(cacheNames.map(name => {
       console.log(name)
-      if (name !== 'sw') {
+      if (name !== cacheStorageKey) {
         return caches.delete(name);
       } else {
         return Promise.resolve();
