@@ -72,6 +72,7 @@ var vm = new Vue({
         this.initSW()
         this.init()
         this.addEventListener()
+        location.reload();
     },
     //销毁
     beforeDestroy() {
