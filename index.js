@@ -69,7 +69,7 @@ var vm = new Vue({
 
     },
     mounted() {
-        this.initSW()
+        // this.initSW()
         this.init()
         this.addEventListener()
     },
