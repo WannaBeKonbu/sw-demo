@@ -1,4 +1,4 @@
-var cacheStorageKey = 'sw'
+// let cacheStorageKey = 'sw'
 var cacheList = [
   // 注册成功后要立即缓存的资源列表
   'https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js',
@@ -32,6 +32,7 @@ self.addEventListener('install', function(e) {
   //https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
   e.waitUntil(
     caches.open(cacheStorageKey).then(function(cache) {
+      console.log(cache)
       return cache.addAll(cacheList)
     })
   );
