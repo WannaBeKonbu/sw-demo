@@ -24,7 +24,6 @@ var cacheList = [
   './html/resultEntry.html',
   './js/resultEntry.js',
 ]
-let cacheStorageKey = 'sw'
 
 // 当浏览器解析完 SW 文件时触发 install 事件
 self.addEventListener('install', function(e) {
