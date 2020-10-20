@@ -1,4 +1,4 @@
-var cacheStorageKey = 'cachesName';
+var cacheStorageKey = 'sw'
 var cacheList = [
   // 注册成功后要立即缓存的资源列表
   'https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js',
@@ -42,7 +42,7 @@ self.addEventListener('activate', function(e) {
   // active 事件中通常做一些过期资源释放的工作，匹配到就从 caches 中删除
   var cacheDeletePromises = caches.keys().then(cacheNames => {
     return Promise.all(cacheNames.map(name => {
-      console.log(name,cacheStorageKey)
+      console.log(name)
       if (name !== cacheStorageKey) {
         return caches.delete(name);
       } else {
