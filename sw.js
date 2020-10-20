@@ -1,3 +1,4 @@
+var cacheStorageKey = 'cachesName';
 var cacheList = [
   // 注册成功后要立即缓存的资源列表
   'https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js',
