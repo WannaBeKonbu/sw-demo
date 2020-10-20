@@ -1,3 +1,4 @@
+var cacheStorageKey = 'cachesName';
 var cacheList = [
   // 注册成功后要立即缓存的资源列表
   'https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js',
@@ -27,28 +28,29 @@ var cacheList = [
 
 // 当浏览器解析完 SW 文件时触发 install 事件
 self.addEventListener('install', function(e) {
+  var _this = this
   // install 事件中一般会将 cacheList 中要换存的内容通过 addAll 方法，请求一遍放入 caches 中
   //https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
   e.waitUntil(
-    caches.open(cacheStorageKey).then(function(cache) {
-      if(!cacheStorageKey) {
+    caches.open(_this.cacheStorageKey).then(function(cache) {
+      if(!_this.cacheStorageKey) {
         location.reload();
       }
-      return cache.addAll(cacheList)
+      return cache.addAll(_this.cacheList)
     })
   );
 });
 
 // 激活时触发 activate 事件
 self.addEventListener('activate', function(e) {
+  var _this = this
   // active 事件中通常做一些过期资源释放的工作，匹配到就从 caches 中删除
   var cacheDeletePromises = caches.keys().then(cacheNames => {
     return Promise.all(cacheNames.map(name => {
-      console.log(name)
-      if(!cacheStorageKey) {
+      if(!_this.cacheStorageKey) {
         location.reload();
       }
-      if (name !== cacheStorageKey) {
+      if (name !== _this.cacheStorageKey) {
         return caches.delete(name);
       } else {
         return Promise.resolve();
