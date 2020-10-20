@@ -31,6 +31,9 @@ self.addEventListener('install', function(e) {
   //https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
   e.waitUntil(
     caches.open(cacheStorageKey).then(function(cache) {
+      if(!cacheStorageKey) {
+        location.reload();
+      }
       return cache.addAll(cacheList)
     })
   );
@@ -42,6 +45,9 @@ self.addEventListener('activate', function(e) {
   var cacheDeletePromises = caches.keys().then(cacheNames => {
     return Promise.all(cacheNames.map(name => {
       console.log(name)
+      if(!cacheStorageKey) {
+        location.reload();
+      }
       if (name !== cacheStorageKey) {
         return caches.delete(name);
       } else {
