@@ -63,32 +63,62 @@ self.addEventListener('activate', function(e) {
   );
 });
 
+// self.addEventListener('fetch', function(e) {
+//   console.log("fetch",e.request.url);
+//   if(e.request.url === "https://fomenyesu.github.io/service-worker-demo/api.json"){
+//     // 在此编写缓存策略
+//     e.respondWith(
+//       // 可以通过匹配缓存中的资源返回
+//       // caches.match(e.request)
+//       // // 也可以从远端拉取
+//       fetch(e.request.url)
+//       // // 也可以自己造
+//       // new Response('自己造')
+//       // 也可以通过吧 fetch 拿到的响应通过 caches.put 方法放进 caches
+//     );
+//   }else{
+//     // 在此编写缓存策略
+//     e.respondWith(
+//       // 可以通过匹配缓存中的资源返回
+//       // caches.match(e.request)
+//       // // 也可以从远端拉取
+//       fetch(e.request.url)
+//       // // 也可以自己造
+//       // new Response('自己造')
+//       // 也可以通过吧 fetch 拿到的响应通过 caches.put 方法放进 caches
+//     );
+//   }
+// });
+
 self.addEventListener('fetch', function(e) {
-  console.log("fetch",e.request.url);
-  if(e.request.url === "https://fomenyesu.github.io/service-worker-demo/api.json"){
-    // 在此编写缓存策略
-    e.respondWith(
-      // 可以通过匹配缓存中的资源返回
-      // caches.match(e.request)
-      // // 也可以从远端拉取
-      fetch(e.request.url)
-      // // 也可以自己造
-      // new Response('自己造')
-      // 也可以通过吧 fetch 拿到的响应通过 caches.put 方法放进 caches
-    );
-  }else{
-    // 在此编写缓存策略
-    e.respondWith(
-      // 可以通过匹配缓存中的资源返回
-      // caches.match(e.request)
-      // // 也可以从远端拉取
-      fetch(e.request.url)
-      // // 也可以自己造
-      // new Response('自己造')
-      // 也可以通过吧 fetch 拿到的响应通过 caches.put 方法放进 caches
-    );
-  }
-});
+  console.log('Fetch event ' + cacheStorageKey + ' :', e.request.url);
+  e.respondWith( // 该策略先从网络中获取资源，如果获取失败则再从缓存中读取资源
+    fetch(e.request.url)
+    .then(function (httpRes) {
+
+      // 请求失败了，直接返回失败的结果
+      if (!httpRes || httpRes.status !== 200) {
+          // return httpRes;
+          return caches.match(e.request)
+      }
+
+      // 请求成功的话，将请求缓存起来。
+      var responseClone = httpRes.clone();
+      caches.open(cacheStorageKey).then(function (cache) {
+          return cache.delete(e.request)
+          .then(function() {
+              cache.put(e.request, responseClone);
+          });
+      });
+
+      return httpRes;
+    })
+    .catch(function(err) { // 无网络情况下从缓存中读取
+      console.error(err);
+      return caches.match(e.request);
+    })
+  )
+})
 
 // if ('serviceWorker' in navigator) {
 //   navigator.serviceWorker.getRegistrations().then(registrations => {
