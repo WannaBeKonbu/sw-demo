@@ -124,14 +124,14 @@ var vm = new Vue({
             } else {
                 console.log('浏览器不支持serviceWorker')
             }
-            fetch('https://fomenyesu.github.io/service-worker-demo/api.json', {
-                method: 'get'
-            }).then(function (response) {
-                console.log(response);
-            }).catch(function (err) {
-                // Error :(
-                console.log(err);
-            });
+            // fetch('https://fomenyesu.github.io/service-worker-demo/api.json', {
+            //     method: 'get'
+            // }).then(function (response) {
+            //     console.log(response);
+            // }).catch(function (err) {
+            //     // Error :(
+            //     console.log(err);
+            // });
         },
         initWebSql() {
             let ycsDb = openDatabase('ycsDb', '1.0', 'ycs db', 50 * 1024 * 1024);
