@@ -1,10 +1,9 @@
-var cacheStorageKey = 'cachesName';
 var cacheList = [
   // 注册成功后要立即缓存的资源列表
   'https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js',
   './css/common.css',
   './css/fonts/iview.css',
-  './css/fonts/flex-table.scss',
+  './css/flex-table.scss',
   './css/fonts/ionicons.svg',
   './css/fonts/ionicons.ttf',
   './css/fonts/ionicons.woff',
