@@ -69,9 +69,9 @@ self.addEventListener('fetch', function(e) {
     // 在此编写缓存策略
     e.respondWith(
       // 可以通过匹配缓存中的资源返回
-      caches.match(e.request)
+      // caches.match(e.request)
       // // 也可以从远端拉取
-      // fetch(e.request.url)
+      fetch(e.request.url)
       // // 也可以自己造
       // new Response('自己造')
       // 也可以通过吧 fetch 拿到的响应通过 caches.put 方法放进 caches
